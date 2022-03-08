@@ -92,3 +92,6 @@ TW_EXCLUDE_TWRPAPP := true
 -include $(LOCAL_PATH)/BoardConfigOFOX.mk
 -include $(LOCAL_PATH)/BoardConfigSHRP.mk
 -include vendor/kud/config/recovery.mk
+
+# Internal Storage Fix
+RECOVERY_SDCARD_ON_DATA := true
