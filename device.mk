@@ -16,7 +16,8 @@
 
 # Crypto
 PRODUCT_PACKAGES += \
-    qcom_decrypt
+    qcom_decrypt \
+    qcom_decrypt_fbe
 
 # Keymaster
 PRODUCT_PACKAGES += \
