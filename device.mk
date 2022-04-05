@@ -14,35 +14,4 @@
 # limitations under the License.
 #
 
-# Apex libraries
-PRODUCT_COPY_FILES += \
-    $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib/libandroidicu.so
-
-# Crypto
-PRODUCT_PACKAGES += \
-    qcom_decrypt
-
-PRODUCT_COPY_FILES += \
-    $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/obj/SHARED_LIBRARIES/libcryptfs_hw_intermediates/libcryptfs_hw.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib/libcryptfs_hw.so
-
-ifeq ($(wildcard vendor/qcom/opensource/cryptfs_hw/Android.bp),)
-PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)/cryptfs_hw
-else
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/vendor/cryptfshw,$(TARGET_COPY_OUT_RECOVERY)/root) \
-    $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/obj/SHARED_LIBRARIES/vendor.qti.hardware.cryptfshw@1.0_intermediates/vendor.qti.hardware.cryptfshw@1.0.so:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib/hw/vendor.qti.hardware.cryptfshw@1.0.so
-endif
-
-# Init scripts
-ifneq ($(wildcard vendor/pb),)
-PRODUCT_COPY_FILES += \
-    bootable/recovery/etc/init/hwservicemanager.rc:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/init/hwservicemanager.rc \
-    bootable/recovery/etc/init/vndservicemanager.rc:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/init/vndservicemanager.rc
-endif
-
-# Keymaster
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.keystore=msm8937
-
 $(call inherit-product-if-exists, vendor/extras/product.mk)
