@@ -15,17 +15,17 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/omni_mi8937.mk
+	$(LOCAL_DIR)/omni_tiare.mk
 
 COMMON_LUNCH_CHOICES := \
-	omni_mi8937-user \
-	omni_mi8937-userdebug \
-	omni_mi8937-eng
+	omni_tiare-user \
+	omni_tiare-userdebug \
+	omni_tiare-eng
 
 PRODUCT_MAKEFILES += \
-	$(LOCAL_DIR)/twrp_mi8937.mk
+	$(LOCAL_DIR)/twrp_tiare.mk
 
 COMMON_LUNCH_CHOICES += \
-	twrp_mi8937-user \
-	twrp_mi8937-userdebug \
-	twrp_mi8937-eng
+	twrp_tiare-user \
+	twrp_tiare-userdebug \
+	twrp_tiare-eng
