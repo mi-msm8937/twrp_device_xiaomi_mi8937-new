@@ -33,6 +33,9 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 TARGET_BOOTLOADER_BOARD_NAME := msm8937
 TARGET_NO_BOOTLOADER := true
 
+# Build
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
 # Crypto
 BOARD_USES_QCOM_DECRYPTION := true
 ifeq ($(wildcard vendor/qcom/opensource/cryptfs_hw/Android.bp),)
@@ -112,7 +115,6 @@ TARGET_RECOVERY_DEVICE_MODULES += tombstoned
 RECOVERY_BINARY_SOURCE_FILES += $(TARGET_OUT_EXECUTABLES)/tombstoned
 
 TARGET_RECOVERY_DEVICE_MODULES += \
-    libandroidicu \
     libxml2 \
     vendor.display.config@1.0 \
     vendor.display.config@2.0
