@@ -41,8 +41,4 @@ PRODUCT_COPY_FILES += \
     bootable/recovery/etc/init/vndservicemanager.rc:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/init/vndservicemanager.rc
 endif
 
-# Keymaster
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.keystore=msm8937
-
 $(call inherit-product-if-exists, vendor/extras/product.mk)
