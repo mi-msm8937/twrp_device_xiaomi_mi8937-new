@@ -33,6 +33,20 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 TARGET_BOOTLOADER_BOARD_NAME := msm8937
 TARGET_NO_BOOTLOADER := true
 
+# Crypto
+BOARD_USES_QCOM_DECRYPTION := true
+ifeq ($(wildcard vendor/qcom/opensource/cryptfs_hw/Android.bp),)
+TARGET_CRYPTFS_HW_PATH := $(DEVICE_PATH)/cryptfs_hw
+else
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
+endif
+TARGET_HW_DISK_ENCRYPTION := true
+
+PLATFORM_VERSION := 127
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+PLATFORM_SECURITY_PATCH := 2127-12-31
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.usbconfigfs=true
@@ -71,6 +85,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 
 # TWRP Configuration
 TW_THEME := portrait_hdpi
+TW_INCLUDE_CRYPTO := true
 TW_MAX_BRIGHTNESS := 255
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_SCREEN_BLANK_ON_BOOT := true
@@ -87,6 +102,13 @@ TW_EXCLUDE_NANO := true
 TW_EXCLUDE_TWRPAPP := true
 TW_EXCLUDE_TZDATA := true
 TW_NO_EXFAT := true
+
+TARGET_RECOVERY_DEVICE_MODULES += \
+    libandroidicu \
+    libxml2
+
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
 
 include $(DEVICE_PATH)/BoardConfigOFOX.mk
 include $(DEVICE_PATH)/BoardConfigPBRP.mk

@@ -20,13 +20,12 @@ PRODUCT_RELEASE_NAME := tiare
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 
+# Inherit from device
+$(call inherit-product, device/xiaomi/tiare/device.mk)
+
 # Inherit common product files.
 $(call inherit-product-if-exists, vendor/omni/config/common.mk)
 $(call inherit-product-if-exists, vendor/pb/config/common.mk)
-
-# Fastboot
-PRODUCT_PACKAGES += \
-    fastboot
 
 # Set those variables here to overwrite the inherited values.
 BOARD_VENDOR := Xiaomi
