@@ -7,7 +7,7 @@
 
 /system_image   emmc   /dev/block/bootdevice/by-name/system
 /vendor_image   emmc   /dev/block/bootdevice/by-name/vendor
-/data           ext4   /dev/block/bootdevice/by-name/userdata                    flags=encryptable=footer
+/data           ext4   /dev/block/bootdevice/by-name/userdata                    flags=fileencryption=ice
 /firmware       vfat   /dev/block/bootdevice/by-name/modem                       flags=display="Firmware"
 /persist        ext4   /dev/block/bootdevice/by-name/persist                     flags=display="Persist"
 /cust           ext4   /dev/block/bootdevice/by-name/cust                        flags=display="Cust"
