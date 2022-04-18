@@ -19,6 +19,10 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
+# Gatekeeper
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.gatekeeper=msm8937
+
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
