@@ -68,7 +68,7 @@ case "$(cat /sys/firmware/devicetree/base/model)" in
 		set_device_codename "uter"
 		set_device_model "UTER"
 		;;
-	"Qualcomm Technologies, Inc. MSM8953 MTP")
+	"Qualcomm Technologies, Inc. MSM8953 + PMI8950 MTP")
 		set_device_codename "oxygen"
 		set_device_model "MI MAX 2"
 		;;
