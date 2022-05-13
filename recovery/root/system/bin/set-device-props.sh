@@ -71,6 +71,7 @@ case "$(cat /sys/firmware/devicetree/base/model)" in
 	"Qualcomm Technologies, Inc. MSM8953 + PMI8950 MTP")
 		set_device_codename "oxygen"
 		set_device_model "MI MAX 2"
+		echo 1 > /sys/devices/platform/soc/78b7000.i2c/i2c-3/3-0038/wakeup_mode
 		;;
 esac
 
