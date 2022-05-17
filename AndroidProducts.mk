@@ -15,17 +15,17 @@
 #
 
 PRODUCT_MAKEFILES := \
-	$(LOCAL_DIR)/omni_mi8937.mk
+	$(LOCAL_DIR)/omni_oxygen.mk
 
 COMMON_LUNCH_CHOICES := \
-	omni_mi8937-user \
-	omni_mi8937-userdebug \
-	omni_mi8937-eng
+	omni_oxygen-user \
+	omni_oxygen-userdebug \
+	omni_oxygen-eng
 
 PRODUCT_MAKEFILES += \
-	$(LOCAL_DIR)/twrp_mi8937.mk
+	$(LOCAL_DIR)/twrp_oxygen.mk
 
 COMMON_LUNCH_CHOICES += \
-	twrp_mi8937-user \
-	twrp_mi8937-userdebug \
-	twrp_mi8937-eng
+	twrp_oxygen-user \
+	twrp_oxygen-userdebug \
+	twrp_oxygen-eng

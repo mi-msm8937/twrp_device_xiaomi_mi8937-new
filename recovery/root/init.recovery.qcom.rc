@@ -21,13 +21,6 @@ service protect-partitions /system/bin/protect-partitions.sh
     oneshot
     seclabel u:r:recovery:s0
 
-service set-device-props /system/bin/set-device-props.sh
-    user root
-    group root
-    disabled
-    oneshot
-    seclabel u:r:recovery:s0
-
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -39,8 +32,8 @@ on boot
 on init
     start detect-dynamic-partitions
     start detect-userdata-encryption
-    start set-device-props
     exec u:r:recovery:s0 -- /system/bin/resetprop ro.boot.verifiedbootstate orange
+    write /sys/devices/platform/soc/78b7000.i2c/i2c-3/3-0038/wakeup_mode 1
 
 on boot
     mkdir /dsp
@@ -53,4 +46,4 @@ on boot
 
 on boot
     start protect-partitions
-    exec u:r:recovery:s0 -- /system/bin/blkroset.mi8937 /dev/block/mmcblk0
+    exec u:r:recovery:s0 -- /system/bin/blkroset.oxygen /dev/block/mmcblk0

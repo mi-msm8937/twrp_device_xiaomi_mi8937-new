@@ -58,6 +58,6 @@ PRODUCT_SOONG_NAMESPACES += \
 
 # Utils
 PRODUCT_PACKAGES += \
-    blkroset.mi8937
+    blkroset.oxygen
 
 $(call inherit-product-if-exists, vendor/extras/product.mk)

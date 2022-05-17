@@ -10,7 +10,7 @@ PROTECTED_PARTITIONS="$(ls /dev/block/platform/soc/${BOOTDEVICE}/by-name/|eval g
 # Make protected partitions read-only
 log "Protected partitions: " $PROTECTED_PARTITIONS
 for p in $PROTECTED_PARTITIONS; do
-    blkroset.mi8937 /dev/block/platform/soc/${BOOTDEVICE}/by-name/${p} || true
+    blkroset.oxygen /dev/block/platform/soc/${BOOTDEVICE}/by-name/${p} || true
 done
 
 exit 0

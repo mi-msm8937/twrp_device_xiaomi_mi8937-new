@@ -3,7 +3,7 @@
 IS_OFFICIAL := false
 
 # Mandatory flags
-SHRP_DEVICE_CODE := mi8937
+SHRP_DEVICE_CODE := oxygen
 SHRP_PATH := device/xiaomi/$(SHRP_DEVICE_CODE)
 #SHRP_MAINTAINER := 
 SHRP_REC_TYPE := Normal
