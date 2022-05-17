@@ -18,6 +18,7 @@
 /efs2           emmc   /dev/block/bootdevice/by-name/modemst2                    flags=backup=1;subpartitionof=/efs1
 /efsc           emmc   /dev/block/bootdevice/by-name/fsc                         flags=backup=1;subpartitionof=/efs1
 /efsg           emmc   /dev/block/bootdevice/by-name/fsg                         flags=backup=1;subpartitionof=/efs1
+/persist_image  emmc   /dev/block/bootdevice/by-name/persist                     flags=backup=1;display="Persist"
 /splash         emmc   /dev/block/bootdevice/by-name/splash                      flags=backup=1;display="Splash"
 
 # Removable storage
