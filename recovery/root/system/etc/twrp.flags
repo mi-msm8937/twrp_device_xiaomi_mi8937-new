@@ -19,7 +19,7 @@
 /efsc           emmc   /dev/block/bootdevice/by-name/fsc                         flags=backup=1;subpartitionof=/efs1
 /efsg           emmc   /dev/block/bootdevice/by-name/fsg                         flags=backup=1;subpartitionof=/efs1
 /persist_image  emmc   /dev/block/bootdevice/by-name/persist                     flags=backup=1;display="Persist"
-/splash         emmc   /dev/block/bootdevice/by-name/splash                      flags=backup=1;display="Splash"
+/splash         emmc   /dev/block/bootdevice/by-name/splash                      flags=backup=1;display="Splash";flashimg=1
 
 # Removable storage
 /sdcard1        auto   /dev/block/mmcblk1p1                                      flags=display="MicroSD";storage;wipeingui;removable
