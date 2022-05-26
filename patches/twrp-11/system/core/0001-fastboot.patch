@@ -1,0 +1,118 @@
+From 0c17d993b21131a1dabcc9204fc6fbaff9362378 Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Wed, 25 May 2022 19:09:06 +0800
+Subject: [PATCH] fastboot
+
+Change-Id: I91ef5b41a094e1d0de0ffe610f3382525d40fcfe
+---
+ fastboot/Android.bp | 79 +++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 76 insertions(+), 3 deletions(-)
+
+diff --git a/fastboot/Android.bp b/fastboot/Android.bp
+index cf0f1ac939..ff0cd7252b 100644
+--- a/fastboot/Android.bp
++++ b/fastboot/Android.bp
+@@ -221,7 +221,7 @@ cc_defaults {
+ //
+ 
+ cc_library_host_static {
+-    name: "libfastboot",
++    name: "libhfastboot",
+     defaults: ["fastboot_host_defaults"],
+ 
+     srcs: [
+@@ -261,11 +261,11 @@ cc_library_host_static {
+ //
+ 
+ cc_binary_host {
+-    name: "fastboot",
++    name: "hfastboot",
+     defaults: ["fastboot_host_defaults"],
+ 
+     srcs: ["main.cpp"],
+-    static_libs: ["libfastboot"],
++    static_libs: ["libhfastboot"],
+ 
+     required: [
+         "mke2fs",
+@@ -322,3 +322,76 @@ cc_test_host {
+         },
+     },
+ }
++
++// Fastboot on Android
++cc_defaults {
++    name: "fastboot_android_defaults",
++
++    use_version_lib: true,
++
++    cflags: [
++        "-Wall",
++        "-Wextra",
++        "-Werror",
++        "-Wunreachable-code",
++        "-Wno-non-virtual-dtor",
++    ],
++
++    stl: "libc++_static",
++
++    // Don't add anything here, we don't want additional shared dependencies
++    // on the host fastboot tool, and shared libraries that link against libc++
++    // will violate ODR.
++    shared_libs: ["libcrypto"],
++
++    header_libs: [
++        "avb_headers",
++        "bootimg_headers",
++    ],
++
++    static_libs: [
++        "libziparchive",
++        "libsparse",
++        "libutils",
++        "liblog",
++        "libz",
++        "libdiagnose_usb",
++        "libbase",
++        "libcutils",
++        "liblp",
++        "libext4_utils",
++    ],
++}
++
++cc_library_static {
++    name: "libfastboot",
++    defaults: ["fastboot_android_defaults"],
++    recovery: true,
++
++    srcs: [
++        "bootimg_utils.cpp",
++        "fastboot.cpp",
++        "fs.cpp",
++        "socket.cpp",
++        "tcp.cpp",
++        "udp.cpp",
++        "util.cpp",
++        "fastboot_driver.cpp",
++        "usb_linux.cpp",
++    ],
++
++    // Only version the final binaries
++    use_version_lib: false,
++    static_libs: ["libbuildversion"],
++
++    generated_headers: ["platform_tools_version"],
++}
++
++cc_binary {
++    name: "fastboot",
++    defaults: ["fastboot_android_defaults"],
++    recovery: true,
++
++    srcs: ["main.cpp"],
++    static_libs: ["libfastboot"],
++}
+\ No newline at end of file
+-- 
+2.30.2
+
