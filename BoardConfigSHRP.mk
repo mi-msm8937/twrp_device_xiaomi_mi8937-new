@@ -1,7 +1,5 @@
 # Refer to https://shrp.github.io/#/guide?id=reference-configuration for details
 
-ifneq ($(SHRP_BUILD),)
-
 IS_OFFICIAL := false
 
 # Mandatory flags
@@ -47,5 +45,3 @@ SHRP_SKIP_DEFAULT_ADDON_4 :=
 #INC_IN_REC_ADDON_4 := true
 #INC_IN_REC_MAGISK := true
 SHRP_EXCLUDE_MAGISK_FLASH := 
-
-endif
