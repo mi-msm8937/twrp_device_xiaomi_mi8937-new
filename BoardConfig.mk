@@ -118,8 +118,8 @@ TARGET_RECOVERY_DEVICE_MODULES += \
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
 
--include $(DEVICE_PATH)/BoardConfigOFOX.mk
--include $(DEVICE_PATH)/BoardConfigPBRP.mk
--include $(DEVICE_PATH)/BoardConfigSHRP.mk
+include $(DEVICE_PATH)/BoardConfigOFOX.mk
+include $(DEVICE_PATH)/BoardConfigPBRP.mk
+include $(DEVICE_PATH)/BoardConfigSHRP.mk
 -include vendor/kud/config/recovery.mk
 -include vendor/extras/board.mk
