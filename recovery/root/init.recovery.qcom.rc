@@ -12,5 +12,5 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export ANDROID_ROOT /system_root
 
-on boot
+on init
     start set-device-props
