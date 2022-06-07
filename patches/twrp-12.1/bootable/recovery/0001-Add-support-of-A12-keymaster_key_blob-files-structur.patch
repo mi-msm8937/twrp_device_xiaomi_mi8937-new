@@ -1,0 +1,51 @@
+From c23eda290b099f31e00b6833954ea5443692331b Mon Sep 17 00:00:00 2001
+From: zhenyolka <zhenyolka@gmail.com>
+Date: Sun, 27 Feb 2022 15:30:44 +0400
+Subject: [PATCH 1/3] Add support of A12 keymaster_key_blob files structure
+
+In A12 keymaster_key_blob format changed
+Compared to A11 it contains another new 8 bytes at beginning "pKMblob\0" (in hex 0x704B4D626C6F6200)
+We can just ignore them
+
+TEST: Tested on our old scorpion_windy,Android 12
+      FDE encrypted. Decrypt successful.
+
+[cafebabe: Adapt for twrp-11]
+
+Change-Id: I8a1701a248be536fdd000b9011122ef954c8e4d1
+Signed-off-by: koron393 <koron393@gmail.com>
+Signed-off-by: Jabiyeff <cebiyevanar@gmail.com>
+---
+ crypto/fscrypt/Keymaster.cpp | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/crypto/fscrypt/Keymaster.cpp b/crypto/fscrypt/Keymaster.cpp
+index c5b7bc3c5..13df388d1 100755
+--- a/crypto/fscrypt/Keymaster.cpp
++++ b/crypto/fscrypt/Keymaster.cpp
+@@ -20,6 +20,7 @@
+ #include <keymasterV4_1/authorization_set.h>
+ #include <keymasterV4_1/keymaster_utils.h>
+ 
++static const std::string kPkmBlob("pKMblob\x00", 8);
+ 
+ using ::android::hardware::hidl_string;
+ using ::android::hardware::hidl_vec;
+@@ -210,6 +211,14 @@ KeymasterOperation Keymaster::begin(km::KeyPurpose purpose, const std::string& k
+         mOpHandle = operationHandle;
+     };
+ 
++    // In A12 keymaster_key_blob format changed:
++    // it have useless for us bytes in beginning, so remove them to correctly handle key
++    std::string kmKey = toString(keyBlob);
++    if (!kmKey.compare(0, kPkmBlob.size(), kPkmBlob)) {
++        kmKey.erase(0, kPkmBlob.size());
++        keyBlob = km::support::blob2hidlVec(kmKey);
++    }
++
+     auto error = mDevice->begin(purpose, keyBlob, inParams.hidl_data(), authToken, hidlCb);
+     if (!error.isOk()) {
+         LOG(ERROR) << "begin failed: " << error.description();
+-- 
+2.30.2
+

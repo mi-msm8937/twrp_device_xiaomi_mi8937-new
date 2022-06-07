@@ -1,0 +1,136 @@
+From d069587c55c5e0394e6ff33dc62825763265f81b Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Tue, 7 Jun 2022 14:32:26 +0800
+Subject: [PATCH] fastboot
+
+Change-Id: I9afd1fe89a677b24fa21ef489100947bb65a070c
+---
+ fastboot/Android.bp | 95 +++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 91 insertions(+), 4 deletions(-)
+
+diff --git a/fastboot/Android.bp b/fastboot/Android.bp
+index 2c70778aea..d563367bcb 100644
+--- a/fastboot/Android.bp
++++ b/fastboot/Android.bp
+@@ -261,11 +261,11 @@ cc_defaults {
+ }
+ 
+ //
+-// Build host libfastboot.
++// Build host libhfastboot.
+ //
+ 
+ cc_library_host_static {
+-    name: "libfastboot",
++    name: "libhfastboot",
+     defaults: ["fastboot_host_defaults"],
+ 
+     srcs: [
+@@ -316,11 +316,11 @@ cc_library_host_static {
+ //
+ 
+ cc_binary_host {
+-    name: "fastboot",
++    name: "hfastboot",
+     defaults: ["fastboot_host_defaults"],
+ 
+     srcs: ["main.cpp"],
+-    static_libs: ["libfastboot"],
++    static_libs: ["libhfastboot"],
+ 
+     required: [
+         "mke2fs",
+@@ -408,3 +408,90 @@ cc_test_host {
+         ":fastboot_test_vendor_boot_v4_with_frag"
+     ],
+ }
++
++// Fastboot on Android
++cc_defaults {
++    name: "fastboot_android_defaults",
++
++    use_version_lib: true,
++
++    cflags: [
++        "-Wall",
++        "-Wextra",
++        "-Werror",
++        "-Wunreachable-code",
++        "-Wno-non-virtual-dtor",
++        "-DANDROID_BASE_UNIQUE_FD_DISABLE_IMPLICIT_CONVERSION",
++        "-D_FILE_OFFSET_BITS=64"
++    ],
++
++    stl: "libc++_static",
++
++    // Don't add anything here, we don't want additional shared dependencies
++    // on the host fastboot tool, and shared libraries that link against libc++
++    // will violate ODR.
++    shared_libs: ["libcrypto"],
++
++    header_libs: [
++        "avb_headers",
++        "bootimg_headers",
++    ],
++
++    static_libs: [
++        "libziparchive",
++        "libsparse",
++        "libutils",
++        "liblog",
++        "libz",
++        "libdiagnose_usb",
++        "libbase",
++        "libcutils",
++        "liblp",
++        "libext4_utils",
++    ],
++}
++
++cc_library_static {
++    name: "libfastboot",
++    defaults: ["fastboot_android_defaults"],
++    recovery: true,
++
++    srcs: [
++        "bootimg_utils.cpp",
++        "fastboot.cpp",
++        "fs.cpp",
++        "socket.cpp",
++        "tcp.cpp",
++        "udp.cpp",
++        "util.cpp",
++        "fastboot_driver.cpp",
++        "usb_linux.cpp",
++        "vendor_boot_img_utils.cpp",
++    ],
++
++    header_libs: [
++        "avb_headers",
++        "libstorage_literals_headers",
++    ],
++
++    // Only version the final binaries
++    use_version_lib: false,
++    static_libs: ["libbuildversion"],
++
++    generated_headers: ["platform_tools_version"],
++
++    tidy_flags: [
++        // DO NOT add quotes around header-filter flag regex argument,
++        // because build/soong will add quotes around the whole flag.
++        "-header-filter=(system/core/fastboot/|development/host/windows/usb/api/)",
++    ],
++}
++
++cc_binary {
++    name: "fastboot",
++    defaults: ["fastboot_android_defaults"],
++    recovery: true,
++
++    srcs: ["main.cpp"],
++    static_libs: ["libfastboot"],
++}
+-- 
+2.30.2
+
