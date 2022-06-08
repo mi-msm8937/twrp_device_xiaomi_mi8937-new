@@ -38,11 +38,7 @@ BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 # Crypto
 BOARD_USES_QCOM_DECRYPTION := true
-ifeq ($(wildcard vendor/qcom/opensource/cryptfs_hw/Android.bp),)
 TARGET_CRYPTFS_HW_PATH := $(DEVICE_PATH)/cryptfs_hw
-else
-TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
-endif
 TARGET_HW_DISK_ENCRYPTION := true
 
 PLATFORM_VERSION := 127
