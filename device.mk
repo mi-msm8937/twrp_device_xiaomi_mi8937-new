@@ -24,11 +24,10 @@ PRODUCT_COPY_FILES += \
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service
+    android.hardware.keymaster@3.0-service_recovery
 
 PRODUCT_COPY_FILES += \
     $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/system/lib64/libkeymaster3device.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libkeymaster3device.so \
-    $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/vendor/bin/hw/android.hardware.keymaster@3.0-service:$(TARGET_COPY_OUT_RECOVERY)/root/system/bin/android.hardware.keymaster@3.0-service \
     $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/vendor/lib64/hw/android.hardware.keymaster@3.0-impl.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/hw/android.hardware.keymaster@3.0-impl.so
 
 # Keymaster
