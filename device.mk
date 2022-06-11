@@ -32,4 +32,8 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.keystore=msm8937
 
+# Soong
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)/cryptfs_hw
+
 $(call inherit-product-if-exists, vendor/extras/product.mk)
