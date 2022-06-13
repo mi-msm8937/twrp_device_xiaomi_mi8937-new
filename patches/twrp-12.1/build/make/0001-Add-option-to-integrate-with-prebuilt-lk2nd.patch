@@ -1,0 +1,32 @@
+From b28e3ca41d878bce52bfead54d811de84a58a75b Mon Sep 17 00:00:00 2001
+From: me-cafebabe <me_cafebabe@hotmail.com>
+Date: Mon, 13 Jun 2022 20:05:18 +0800
+Subject: [PATCH] Add option to integrate with prebuilt lk2nd
+
+Change-Id: I2e76bf4113c0be180066f741ca6f5b3e47d2f61a
+---
+ core/Makefile | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/core/Makefile b/core/Makefile
+index c2a29398e8..7c8eec9338 100644
+--- a/core/Makefile
++++ b/core/Makefile
+@@ -2281,6 +2281,14 @@ define build-recoveryimage-target
+     $(MKBOOTIMG) $(if $(strip $(2)),--kernel $(strip $(2))) $(INTERNAL_RECOVERYIMAGE_ARGS) \
+                  $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(INTERNAL_MKBOOTIMG_GKI_SINGING_ARGS) \
+                  $(BOARD_RECOVERY_MKBOOTIMG_ARGS) --output $(1))
++  $(if $(strip $(TARGET_PREBUILT_LK2ND)), \
++    mv $(1) $(1).orig; \
++    cp $(TARGET_PREBUILT_LK2ND) $(1); \
++    lk2nd_size=$$(stat -c%s $(1)); \
++    lk2nd_gaps=$$(expr 1048576 - $$lk2nd_size); \
++    dd if=/dev/zero bs=1 count=$$lk2nd_gaps >> $(1); \
++    cat $(1).orig >> $(1); \
++  )
+   $(if $(filter true,$(PRODUCT_SUPPORTS_BOOT_SIGNER)),\
+     $(if $(filter true,$(BOARD_USES_RECOVERY_AS_BOOT)),\
+       $(BOOT_SIGNER) /boot $(1) $(PRODUCT_VERITY_SIGNING_KEY).pk8 $(PRODUCT_VERITY_SIGNING_KEY).x509.pem $(1),\
+-- 
+2.30.2
+
