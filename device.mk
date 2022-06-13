@@ -34,13 +34,6 @@ PRODUCT_COPY_FILES += \
     $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/obj/SHARED_LIBRARIES/vendor.qti.hardware.cryptfshw@1.0_intermediates/vendor.qti.hardware.cryptfshw@1.0.so:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/lib64/hw/vendor.qti.hardware.cryptfshw@1.0.so
 endif
 
-# Init scripts
-ifneq ($(wildcard vendor/pb),)
-PRODUCT_COPY_FILES += \
-    bootable/recovery/etc/init/hwservicemanager.rc:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/init/hwservicemanager.rc \
-    bootable/recovery/etc/init/vndservicemanager.rc:$(TARGET_COPY_OUT_RECOVERY)/root/system/etc/init/vndservicemanager.rc
-endif
-
 # Keymaster
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.keystore=msm8937
