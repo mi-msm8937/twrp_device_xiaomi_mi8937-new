@@ -1,5 +1,12 @@
 import /init.recovery.qcom_decrypt.rc
 
+service protect-partitions /system/bin/protect-partitions.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
 service set-device-props /system/bin/set-device-props.sh
     user root
     group root
@@ -14,3 +21,7 @@ on fs
 
 on init
     start set-device-props
+
+on boot
+    start protect-partitions
+    exec u:r:recovery:s0 -- /system/bin/blockdev --setro /dev/block/mmcblk0
