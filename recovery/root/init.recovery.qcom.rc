@@ -23,5 +23,14 @@ on init
     start set-device-props
 
 on boot
+    mkdir /dsp
+    mkdir /firmware
+    mount ext4 /dev/block/bootdevice/by-name/dsp /dsp ro
+    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro
+    start qseecomd
+    exec u:r:recovery:s0 -- /system/bin/sleep 1s
+    start keymaster-3-0
+
+on boot
     start protect-partitions
     exec u:r:recovery:s0 -- /system/bin/blockdev --setro /dev/block/mmcblk0
