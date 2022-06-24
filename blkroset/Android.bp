@@ -1,5 +1,5 @@
 cc_binary {
-    name: "blkroset",
+    name: "blkroset.mi8937",
     recovery: true,
     srcs: ["blkroset.c"],
     cflags: [

@@ -40,6 +40,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Utils
 PRODUCT_PACKAGES += \
-    blkroset
+    blkroset.mi8937
 
 $(call inherit-product-if-exists, vendor/extras/product.mk)
