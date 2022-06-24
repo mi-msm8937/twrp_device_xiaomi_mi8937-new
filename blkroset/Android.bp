@@ -1,0 +1,10 @@
+cc_binary {
+    name: "blkroset",
+    recovery: true,
+    srcs: ["blkroset.c"],
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+}

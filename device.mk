@@ -38,4 +38,8 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hardware.keystore=msm8937
 
+# Utils
+PRODUCT_PACKAGES += \
+    blkroset
+
 $(call inherit-product-if-exists, vendor/extras/product.mk)

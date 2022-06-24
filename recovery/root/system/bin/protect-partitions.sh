@@ -10,7 +10,7 @@ PROTECTED_PARTITIONS="$(ls /dev/block/platform/soc/${BOOTDEVICE}/by-name/|eval g
 # Make protected partitions read-only
 log "Protected partitions: " $PROTECTED_PARTITIONS
 for p in $PROTECTED_PARTITIONS; do
-    blockdev --setro /dev/block/platform/soc/${BOOTDEVICE}/by-name/${p} || true
+    blkroset /dev/block/platform/soc/${BOOTDEVICE}/by-name/${p} || true
 done
 
 exit 0

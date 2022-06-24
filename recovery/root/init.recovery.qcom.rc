@@ -33,4 +33,4 @@ on boot
 
 on boot
     start protect-partitions
-    exec u:r:recovery:s0 -- /system/bin/blockdev --setro /dev/block/mmcblk0
+    exec u:r:recovery:s0 -- /system/bin/blkroset /dev/block/mmcblk0
