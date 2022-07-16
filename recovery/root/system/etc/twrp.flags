@@ -3,6 +3,7 @@
 /cache          ext4   /dev/block/bootdevice/by-name/cache
 /recovery       emmc   /dev/block/bootdevice/by-name/recovery                    flags=backup=1
 
+/metadata       ext4   /dev/block/bootdevice/by-name/oem                         flags=display="Metadata"
 /firmware       vfat   /dev/block/bootdevice/by-name/modem                       flags=display="Firmware";mounttodecrypt;fsflags="ro"
 /persist        ext4   /dev/block/bootdevice/by-name/persist                     flags=display="Persist"
 /misc           emmc   /dev/block/bootdevice/by-name/misc
