@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-if dd if=/dev/block/by-name/system bs=256k count=1|strings|grep mi8937_dynpart > /dev/null; then
+if dd if=/dev/block/by-name/system bs=256k count=1|strings|grep oxygen_dynpart > /dev/null; then
     # Dynamic partitions
     cat /system/etc/recovery.fstab.dynamic >> /system/etc/recovery.fstab
     cat /system/etc/twrp.flags.dynamic >> /system/etc/twrp.flags
