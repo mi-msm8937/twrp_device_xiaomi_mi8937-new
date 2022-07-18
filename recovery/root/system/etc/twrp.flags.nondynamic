@@ -1,0 +1,5 @@
+# Underlying partitions of Retrofit Dynamic Partitions
+/system_root    ext4   /dev/block/bootdevice/by-name/system                      flags=display="System (Physical)";wipeingui
+/vendor         ext4   /dev/block/bootdevice/by-name/cust                        flags=display="Vendor (Physical)";wipeingui
+/system_image   emmc   /dev/block/bootdevice/by-name/system                      flags=display="System (Physical)"
+/vendor_image   emmc   /dev/block/bootdevice/by-name/cust                        flags=display="Vendor (Physical)"
