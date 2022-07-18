@@ -7,7 +7,6 @@
 
 /system_image   emmc   /dev/block/bootdevice/by-name/system
 /vendor_image   emmc   /dev/block/bootdevice/by-name/cust
-/data           ext4   /dev/block/bootdevice/by-name/userdata                    flags=fileencryption=aes-256-xts
 /firmware       vfat   /dev/block/bootdevice/by-name/modem                       flags=display="Firmware";mounttodecrypt;fsflags="ro"
 /persist        ext4   /dev/block/bootdevice/by-name/persist                     flags=display="Persist"
 /cust           ext4   /dev/block/bootdevice/by-name/cust                        flags=display="Cust"

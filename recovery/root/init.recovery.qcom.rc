@@ -1,5 +1,12 @@
 import /init.recovery.qcom_decrypt.rc
 
+service detect-userdata-encryption /system/bin/detect-userdata-encryption.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
 service protect-partitions /system/bin/protect-partitions.sh
     user root
     group root
@@ -20,6 +27,7 @@ on fs
     export ANDROID_ROOT /system_root
 
 on init
+    start detect-userdata-encryption
     start set-device-props
 
 on boot
