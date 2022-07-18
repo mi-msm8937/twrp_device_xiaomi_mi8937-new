@@ -26,6 +26,9 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export ANDROID_ROOT /system_root
 
+on boot
+    start health-hal-2-1
+
 on init
     start detect-userdata-encryption
     start set-device-props

@@ -1,0 +1,10 @@
+#!/system/bin/sh -e
+if [ ! -d "/mnt/cache" ]; then
+    mkdir -p /mnt/cache
+    mount -o ro /dev/block/bootdevice/by-name/cache /mnt/cache
+fi
+cp /mnt/cache/fastbootd/fastbootd /sbin/fastbootd
+cp /mnt/cache/fastbootd/android.hardware.fastboot@1.0.so /system/lib64/android.hardware.fastboot@1.0.so
+cp /mnt/cache/fastbootd/android.hardware.fastboot@1.1.so /system/lib64/android.hardware.fastboot@1.1.so
+chmod 755 /sbin/fastbootd
+/sbin/fastbootd $@
