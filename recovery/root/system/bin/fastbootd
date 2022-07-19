@@ -1,4 +1,5 @@
 #!/system/bin/sh -e
+resetprop ro.boot.verifiedbootstate orange
 if [ ! -d "/mnt/cache" ]; then
     mkdir -p /mnt/cache
     mount -o ro /dev/block/bootdevice/by-name/cache /mnt/cache
